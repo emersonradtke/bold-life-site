@@ -45,7 +45,7 @@ export default function BottomNav() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-card/80 backdrop-blur-xl border border-border rounded-full px-2 py-2 flex gap-1"
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-card/80 backdrop-blur-xl border border-border rounded-full px-2 py-2 flex gap-1"
         >
           {navItems.map((item) => {
             const isActive = active === item.href;
