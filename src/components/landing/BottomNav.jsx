@@ -14,12 +14,12 @@ const navItems = [
 ];
 
 export default function BottomNav() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [active, setActive] = useState('#hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 400);
+      setVisible(true);
 
       const sections = navItems.map(n => n.href.slice(1));
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -43,9 +43,9 @@ export default function BottomNav() {
     <AnimatePresence>
       {visible && (
         <motion.nav
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
+          exit={{ y: -100, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-xl border-b border-border px-4 py-2 flex items-center justify-between"
         >

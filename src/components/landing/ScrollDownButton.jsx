@@ -45,9 +45,6 @@ export default function ScrollDownButton() {
       onClick={handleClick}
       className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1 group cursor-pointer"
     >
-      <span className="text-muted-foreground text-xs font-heading tracking-widest uppercase group-hover:text-primary transition-colors duration-300">
-        Explore
-      </span>
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
