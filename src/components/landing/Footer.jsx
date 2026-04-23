@@ -1,0 +1,38 @@
+import { motion } from 'framer-motion';
+
+const NETWORK_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/2d871558f_generated_551aebed.png';
+
+export default function Footer() {
+  return (
+    <footer className="relative py-20 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-border" />
+
+      {/* Background through letters effect */}
+      <div className="absolute inset-0 opacity-5">
+        <img src={NETWORK_IMG} alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
+        {/* Large brand text */}
+        <div className="text-center mb-12">
+          <h2 className="font-heading font-black text-6xl md:text-8xl lg:text-9xl tracking-tighter text-foreground/5">
+            BOLD LIFE
+          </h2>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-muted-foreground">
+          <p className="font-heading font-semibold text-foreground">Bold Life™</p>
+          <p>Ecossistema de educação e consumo inteligente.</p>
+          <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
+        </div>
+
+        {/* Decorative line */}
+        <div className="mt-8 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+
+        <p className="text-center text-xs text-muted-foreground/50 mt-6">
+          Nascida na solidez industrial do Vale do Aço — Minas Gerais, Brasil.
+        </p>
+      </div>
+    </footer>
+  );
+}
