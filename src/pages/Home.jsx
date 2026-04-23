@@ -7,12 +7,14 @@ import FinalCTA from '../components/landing/FinalCTA';
 import Footer from '../components/landing/Footer';
 import ScrollProgress from '../components/landing/ScrollProgress';
 import BottomNav from '../components/landing/BottomNav';
+import ScrollDownButton from '../components/landing/ScrollDownButton';
 
 export default function Home() {
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-x-hidden">
       <ScrollProgress />
       <BottomNav />
+      <ScrollDownButton />
       <HeroSection />
       <AuthoritySection />
       <PhysicalPresence />
