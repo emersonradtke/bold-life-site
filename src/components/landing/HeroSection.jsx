@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HERO_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/923b7524e_generated_3b7c55ae.png';
-const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/c77a02dad_BOLD-LOGO06.png';
+const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/c45c6b15b_BOLDLIFE01-LOGO1.png';
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
 
 export default function HeroSection() {
