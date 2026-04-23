@@ -3,6 +3,8 @@ import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HERO_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/923b7524e_generated_3b7c55ae.png';
+const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/c77a02dad_BOLD-LOGO06.png';
+const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
 
 export default function HeroSection() {
   return (
@@ -18,8 +20,18 @@ export default function HeroSection() {
       <div className="absolute left-8 lg:left-16 top-0 h-full w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 py-32">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-36 pb-32">
         <div className="max-w-3xl">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-10"
+          >
+            <img src={LOGO} alt="Bold Life" className="h-14 md:h-16" />
+          </motion.div>
+
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: '4rem' }}
@@ -33,7 +45,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-primary font-heading font-bold text-sm tracking-[0.3em] uppercase mb-6"
           >
-            Bold Life — Ecossistema de Transformação
+            Ecossistema de Transformação
           </motion.p>
 
           <motion.h1
@@ -70,16 +82,14 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Large decorative text */}
+        {/* Large decorative icon */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.03 }}
+          animate={{ opacity: 0.06 }}
           transition={{ duration: 1.5, delay: 1.2 }}
-          className="absolute -right-20 top-1/2 -translate-y-1/2 hidden xl:block"
+          className="absolute -right-16 top-1/2 -translate-y-1/2 hidden xl:block"
         >
-          <span className="font-heading font-black text-[16rem] leading-none select-none whitespace-nowrap">
-            BOLD
-          </span>
+          <img src={ICON} alt="" className="w-[480px] h-[480px] object-contain select-none" style={{ filter: 'invert(1)' }} />
         </motion.div>
       </div>
 

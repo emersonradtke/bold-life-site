@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, TrendingUp, MapPin, Users, Award, Rocket } from 'lucide-react';
 
+const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/ae23cf705_BOLD-LOGO07.png';
+
 const navItems = [
   { icon: Flame, label: 'Início', href: '#hero' },
   { icon: TrendingUp, label: 'Ciência', href: '#autoridade' },
@@ -45,8 +47,13 @@ export default function BottomNav() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-card/80 backdrop-blur-xl border border-border rounded-full px-2 py-2 flex gap-1"
+          className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-xl border-b border-border px-4 py-2 flex items-center justify-between"
         >
+          {/* Logo */}
+          <img src={LOGO} alt="Bold Life" className="h-8 opacity-90" />
+
+          {/* Nav items */}
+          <div className="flex items-center gap-1">
           {navItems.map((item) => {
             const isActive = active === item.href;
             return (
@@ -73,6 +80,7 @@ export default function BottomNav() {
               </button>
             );
           })}
+          </div>
         </motion.nav>
       )}
     </AnimatePresence>

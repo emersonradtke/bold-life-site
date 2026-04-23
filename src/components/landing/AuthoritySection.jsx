@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { DollarSign, TrendingUp, Globe } from 'lucide-react';
+
+const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
 
 const stats = [
   { icon: DollarSign, value: '$200B', label: 'Mercado Global' },
@@ -17,6 +18,11 @@ export default function AuthoritySection() {
     <section id="autoridade" className="relative py-32 overflow-hidden">
       {/* Steel line divider */}
       <div className="absolute top-0 left-0 right-0 h-px bg-border" />
+
+      {/* Decorative icon bg */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.04] pointer-events-none hidden lg:block">
+        <img src={ICON} alt="" className="w-[500px] h-[500px] object-contain" style={{ filter: 'invert(1)' }} />
+      </div>
 
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
