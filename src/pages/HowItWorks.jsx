@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, TrendingUp, Users, Zap, Target } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Users, Zap, Target, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
@@ -46,10 +46,28 @@ export default function HowItWorks() {
   const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [showScroll, setShowScroll] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScroll(window.scrollY < window.innerHeight * 0.5);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollNext = () => {
+    const element = document.querySelector('[data-scroll-target]');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
@@ -98,8 +116,26 @@ export default function HowItWorks() {
         </div>
       </div>
 
+      {/* Scroll Down Button */}
+      {showScroll && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          onClick={scrollNext}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 p-3 rounded-full border border-primary/30 hover:border-primary transition-all duration-300 group"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ChevronDown className="w-6 h-6 text-primary group-hover:text-primary/80 transition-colors" />
+          </motion.div>
+        </motion.button>
+      )}
+
       {/* Content Sections */}
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pb-32">
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pb-32" data-scroll-target>
         {sections.map((section, idx) => {
           const Icon = section.icon;
           return (
