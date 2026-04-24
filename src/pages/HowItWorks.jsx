@@ -70,7 +70,7 @@ export default function HowItWorks() {
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
       {/* Background decorative logos */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
+      <div className="fixed inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
           <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
         </div>
