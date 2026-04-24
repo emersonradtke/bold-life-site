@@ -53,9 +53,14 @@ export default function HowItWorks() {
 
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
-      {/* Background decorative logo */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
-        <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+      {/* Background decorative logos */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+          <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+        </div>
+        <div className="absolute bottom-0 right-0 w-full h-full flex items-center justify-center">
+          <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" style={{ filter: 'invert(1)' }} />
+        </div>
       </div>
 
       {/* Header */}
