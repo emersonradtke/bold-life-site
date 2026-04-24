@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
 const HEADER_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/1be673aa0_BOLDLIFE02-LOGO1.png';
+const HEADER_BG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6c8e365d7_Capturadetela2026-04-24113616.png';
 
 const sections = [
   {
@@ -80,7 +81,12 @@ export default function HowItWorks() {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-8 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-8 pb-16" style={{
+        backgroundImage: `url(${HEADER_BG})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
         <button
           onClick={() => navigate('/')}
           className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8"
