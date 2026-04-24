@@ -34,7 +34,11 @@ export default function BottomNav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (href) => {
+  const scrollTo = (href, label) => {
+    if (label === 'Acesse') {
+      window.open('https://boldlife7.com.br/bold/login.php', '_blank');
+      return;
+    }
     const el = document.getElementById(href.slice(1));
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -59,7 +63,7 @@ export default function BottomNav() {
             return (
               <button
                 key={item.href}
-                onClick={() => scrollTo(item.href)}
+                onClick={() => scrollTo(item.href, item.label)}
                 className={`relative flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 ${
                 isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`
                 }>
