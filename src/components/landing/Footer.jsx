@@ -47,6 +47,17 @@ export default function Footer() {
         <p className="text-center text-xs text-muted-foreground/50 mt-6">
           Nascida na solidez industrial do Vale do Aço — Minas Gerais, Brasil.
         </p>
+
+        <div className="text-center mt-4">
+          <a
+            href="https://boldlife7.com.br/bold/bold_acesso_painel_admin_2026/login.phpp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors duration-300"
+          >
+            Admin
+          </a>
+        </div>
       </div>
     </footer>
   );
