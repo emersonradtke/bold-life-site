@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, TrendingUp, Users, Zap, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
+const HEADER_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/1be673aa0_BOLDLIFE02-LOGO1.png';
+
 const sections = [
   {
     title: 'EMPREENDA CONSUMINDO E INDICANDO',
@@ -45,7 +48,12 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <div className="relative bg-background text-foreground min-h-screen">
+    <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
+      {/* Background decorative logo */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
+        <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+      </div>
+
       {/* Header */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-8 pb-16">
         <button
@@ -63,6 +71,7 @@ export default function HowItWorks() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
+            <img src={HEADER_LOGO} alt="Bold Life" className="h-12 mb-8" />
             <div className="h-0.5 w-12 bg-primary mb-6" />
             <p className="text-primary font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4">
               Entenda o Sistema
