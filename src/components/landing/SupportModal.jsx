@@ -9,11 +9,13 @@ const departments = [
   { label: 'Administrativo', email: 'adm@boldlifeoficial.com.br' },
 ];
 
-export default function SupportModal() {
+export default function SupportModal({ visible = true }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', department: '', message: '' });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+
+  if (!visible) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
