@@ -35,7 +35,8 @@ export default function ScrollDownButton() {
     }
   };
 
-  if (!visible) return null;
+  const isLastSection = currentSection === sections[sections.length - 1];
+  if (!visible || isLastSection) return null;
 
   return (
     <motion.button
