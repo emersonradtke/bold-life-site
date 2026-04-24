@@ -64,7 +64,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-12"
           >
-            Saia da inércia e conecte-se ao ecossistema de educação e consumo que transforma o inevitável em liberdade real. A Bold Life é a ponte entre onde você está e onde você decidiu chegar.
+            Saia da inércia e conecte-se a um ecossistema de educação e consumo que transforma hábitos comuns em resultados extraordinários. A Bold Life é a ponte entre onde você está e o futuro que você decidiu construir.
           </motion.p>
 
           <motion.div
