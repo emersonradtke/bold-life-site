@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { DollarSign, TrendingUp, Globe } from 'lucide-react';
 
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
+const HERO_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/923b7524e_generated_3b7c55ae.png';
 
 const stats = [
   { icon: DollarSign, value: '$200B', label: 'Mercado Global' },
@@ -16,6 +17,12 @@ export default function AuthoritySection() {
 
   return (
     <section id="autoridade" className="relative py-32 overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img src={HERO_IMG} alt="" className="w-full h-full object-cover opacity-15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/70" />
+      </div>
+
       {/* Steel line divider */}
       <div className="absolute top-0 left-0 right-0 h-px bg-border" />
 
