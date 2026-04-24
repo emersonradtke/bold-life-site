@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { Instagram } from 'lucide-react';
 
 const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/aa85e3a3d_BOLDLIFE02-LOGO1.png';
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
@@ -23,6 +23,17 @@ export default function Footer() {
         {/* Logo centered */}
         <div className="text-center mb-12">
           <img src={LOGO} alt="Bold Life" className="h-16 mx-auto opacity-80" />
+          <div className="flex justify-center mt-6">
+            <a
+              href="https://www.instagram.com/boldlifebrasil/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+            >
+              <Instagram className="w-5 h-5" />
+              <span className="text-sm font-heading font-semibold">@boldlifebrasil</span>
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-muted-foreground">
