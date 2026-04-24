@@ -196,7 +196,8 @@ export default function HowItWorks() {
           <button
             onClick={() => {
               navigate('/');
-              window.scrollTo(0, 0);
+              window.getSelection().removeAllRanges();
+              setTimeout(() => window.scrollTo(0, 0), 0);
             }}
             className="flex items-center justify-center gap-2 text-primary hover:text-primary/80 transition-colors mx-auto"
           >
