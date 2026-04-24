@@ -50,7 +50,7 @@ export default function Footer() {
 
         <div className="text-center mt-4">
           <a
-            href="https://boldlife7.com.br/bold/bold_acesso_painel_admin_2026/login.phpp"
+            href="https://boldlife7.com.br/bold/bold_acesso_painel_admin_2026/login.php"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors duration-300"
