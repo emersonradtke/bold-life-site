@@ -178,17 +178,27 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="text-center"
+          className="text-center space-y-8"
         >
-          <h3 className="font-heading font-bold text-2xl mb-6">Educação, Consumo Inteligente e Empreendedorismo em Rede</h3>
-          <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)]"
-            >
-              COMECE AGORA
-            </Button>
-          </a>
+          <div>
+            <h3 className="font-heading font-bold text-2xl mb-6">Educação, Consumo Inteligente e Empreendedorismo em Rede</h3>
+            <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)]"
+              >
+                COMECE AGORA
+              </Button>
+            </a>
+          </div>
+          
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center justify-center gap-2 text-primary hover:text-primary/80 transition-colors mx-auto"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="font-heading font-semibold">Voltar à página principal</span>
+          </button>
         </motion.div>
       </div>
 
