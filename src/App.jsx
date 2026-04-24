@@ -7,6 +7,7 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
+import HowItWorks from './pages/HowItWorks';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -37,6 +38,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/como-funciona" element={<HowItWorks />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

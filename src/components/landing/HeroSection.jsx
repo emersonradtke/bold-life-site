@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const HERO_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/923b7524e_generated_3b7c55ae.png';
 const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/aa85e3a3d_BOLDLIFE02-LOGO1.png';
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
@@ -62,10 +64,24 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-12"
+            className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mb-6"
           >
             Saia da inércia e conecte-se a um ecossistema de educação e consumo que transforma hábitos comuns em resultados extraordinários. A Bold Life é a ponte entre onde você está e o futuro que você decidiu construir.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.85 }}
+            className="mb-12"
+          >
+            <button
+              onClick={() => navigate('/como-funciona')}
+              className="text-primary hover:text-primary/80 font-heading font-semibold underline underline-offset-4 transition-colors"
+            >
+              Como funciona a Bold Life →
+            </button>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
