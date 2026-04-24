@@ -1,15 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Award, GraduationCap, Ship, Plane } from 'lucide-react';
+import { Award, GraduationCap } from 'lucide-react';
 
-const CRUISE_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/00f573a43_generated_ba12b153.png';
-const PASSPORT_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/5f7e89a7e_generated_5d4f8787.png';
+const TRAINING_IMG = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80';
+const AWARD_IMG = 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1200&q=80';
 
 const rewards = [
-  { icon: GraduationCap, title: 'Capacitação de Elite', desc: 'Treinamentos intensivos com os maiores líderes do mercado.', img: null },
-  { icon: Ship, title: 'Cruzeiros All-Inclusive', desc: 'Experiências marítimas inesquecíveis para os líderes da rede.', img: CRUISE_IMG },
-  { icon: Plane, title: 'Viagens Internacionais', desc: 'Desbrave o mundo como reconhecimento pelo seu mérito.', img: PASSPORT_IMG },
-  { icon: Award, title: 'Premiações Exclusivas', desc: 'Momentos que o dinheiro comum não pode comprar.', img: null },
+  { icon: GraduationCap, title: 'Capacitação de Elite', desc: 'Treinamentos intensivos com os maiores líderes do mercado.', img: TRAINING_IMG },
+  { icon: Award, title: 'Premiações Exclusivas', desc: 'Momentos que o dinheiro comum não pode comprar.', img: AWARD_IMG },
 ];
 
 export default function LifestyleSection() {
