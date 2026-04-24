@@ -62,6 +62,11 @@ export default function HowItWorks() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleScrollDown = () => {
+    const scrollAmount = window.innerHeight * 0.8;
+    window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
       {/* Background decorative logos */}
@@ -194,7 +199,7 @@ export default function HowItWorks() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+          onClick={handleScrollDown}
           className="fixed bottom-8 right-8 z-40 p-3 rounded-full bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-colors duration-300"
         >
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
