@@ -82,13 +82,15 @@ export default function FinalCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
-          <Button
-            size="lg"
-            className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)] group"
-          >
-            ACESSAR ECOSSISTEMA BOLD LIFE
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)] group"
+            >
+              ACESSAR ECOSSISTEMA BOLD LIFE
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </a>
         </motion.div>
       </div>
     </section>
