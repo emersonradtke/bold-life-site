@@ -58,7 +58,7 @@ export default function LifestyleSection() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-muted-foreground leading-relaxed"
           >
-            O seu esforço na Bold Life não gera apenas rendimentos, gera um novo estilo de vida. Acreditamos que cada degrau conquistado deve ser celebrado com excelência. Por isso, criamos um plano de premiações que vai muito além do financeiro: treinamentos intensivos de capacitação, premiações exclusivas que decidem fazer história. Aqui, bater metas significa colecionar momentos que o dinheiro comum não pode comprar.
+            O seu esforço na Bold Life não gera apenas rendimentos, gera um novo estilo de vida. Acreditamos que cada degrau conquistado deve ser celebrado com excelência. Por isso, criamos um plano de premiações que vai muito além do financeiro: e treinamentos intensivos de capacitação, premiações exclusivas que decidem fazer história. Aqui, bater metas significa colecionar momentos que o dinheiro comum não pode comprar.
           </motion.p>
         </div>
 
