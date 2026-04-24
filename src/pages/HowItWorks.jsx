@@ -156,22 +156,14 @@ export default function HowItWorks() {
           className="text-center"
         >
           <h3 className="font-heading font-bold text-2xl mb-6">Educação, Consumo Inteligente e Empreendedorismo em Rede</h3>
-          <div className="flex flex-col gap-4 items-center">
-            <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)]"
-              >
-                COMECE AGORA
-              </Button>
-            </a>
-            <button
-              onClick={() => navigate('/')}
-              className="text-primary hover:text-primary/80 font-heading font-semibold underline underline-offset-4 transition-colors"
+          <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground font-heading font-bold text-base tracking-wide px-12 py-7 rounded-sm hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_60px_rgba(244,180,0,0.3)]"
             >
-              ← Voltar ao Início
-            </button>
-          </div>
+              COMECE AGORA
+            </Button>
+          </a>
         </motion.div>
       </div>
     </div>
