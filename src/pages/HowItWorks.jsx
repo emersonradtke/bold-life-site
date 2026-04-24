@@ -85,7 +85,8 @@ export default function HowItWorks() {
         backgroundImage: `url(${HEADER_BG})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        filter: 'invert(1)'
       }}>
         <button
           onClick={() => navigate('/')}
