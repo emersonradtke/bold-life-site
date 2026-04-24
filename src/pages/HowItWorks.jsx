@@ -181,6 +181,7 @@ export default function HowItWorks() {
           className="text-center space-y-8"
         >
           <div>
+            <img src={HEADER_LOGO} alt="Bold Life" className="h-10 mb-8 mx-auto" />
             <h3 className="font-heading font-bold text-2xl mb-6">Educação, Consumo Inteligente e Empreendedorismo em Rede</h3>
             <a href="https://boldlife7.com.br/bold/register.php?id=01" target="_blank" rel="noopener noreferrer">
               <Button
