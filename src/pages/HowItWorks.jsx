@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, TrendingUp, Users, Zap, Target } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Users, Zap, Target, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
@@ -46,9 +46,20 @@ export default function HowItWorks() {
   const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [showScrollButton, setShowScrollButton] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      setShowScrollButton(scrolled < scrollHeight - 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -175,6 +186,22 @@ export default function HowItWorks() {
           </a>
         </motion.div>
       </div>
+
+      {/* Scroll Down Button */}
+      {showScrollButton && (
+        <motion.button
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 z-40 p-3 rounded-full bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-colors duration-300"
+        >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <ChevronDown className="w-6 h-6 text-primary" />
+          </motion.div>
+        </motion.button>
+      )}
     </div>
   );
 }
