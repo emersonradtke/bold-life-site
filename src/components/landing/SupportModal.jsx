@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, ChevronDown } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
-const departments = [
+let departments = [
   { label: 'Suporte TI', email: 'ti@boldlifeoficial.com.br' },
   { label: 'Financeiro', email: 'financeiro@boldlifeoficial.com.br' },
   { label: 'Administrativo', email: 'adm@boldlifeoficial.com.br' },
@@ -14,6 +14,22 @@ export default function SupportModal({ visible = true }) {
   const [form, setForm] = useState({ name: '', email: '', department: '', message: '' });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [depts, setDepts] = useState(departments);
+
+  useEffect(() => {
+    loadDepartments();
+  }, []);
+
+  const loadDepartments = async () => {
+    try {
+      const configs = await base44.entities.SupportEmailConfig.list();
+      if (configs && configs.length > 0) {
+        setDepts(configs.map(c => ({ label: c.department, email: c.email })));
+      }
+    } catch (error) {
+      console.error('Erro ao carregar departamentos:', error);
+    }
+  };
 
   if (!visible) return null;
 
@@ -147,7 +163,7 @@ export default function SupportModal({ visible = true }) {
                           className="w-full appearance-none bg-muted border border-border rounded-sm px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors pr-10"
                         >
                           <option value="" disabled>Selecione o setor...</option>
-                          {departments.map(d => (
+                          {depts.map(d => (
                             <option key={d.label} value={d.label}>{d.label}</option>
                           ))}
                         </select>
