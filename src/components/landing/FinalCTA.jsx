@@ -58,7 +58,7 @@ export default function FinalCTA() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="text-muted-foreground leading-relaxed mb-10"
         >
-          Não estamos aqui para fazer promessas, estamos aqui para oferecer um sistema comprovado de transformação. A oportunidade está na mesa: 30 mil produtos à disposição, parcerias físicas em todo o país e um plano de carreira sustentável. A única variável que falta para essa engrenagem girar é a sua atitude de dar o primeiro passo.
+          Não estamos aqui para fazer promessas, estamos aqui para oferecer um sistema comprovado de transformação. A oportunidade está na mesa: + de 30 mil produtos à disposição, parcerias físicas em todo o país e um plano de carreira sustentável. A única variável que falta para essa engrenagem girar é a sua atitude de dar o primeiro passo e fazer aquilo que precisa ser feito.
         </motion.p>
 
         {/* Highlight pills */}
