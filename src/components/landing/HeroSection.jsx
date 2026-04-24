@@ -23,7 +23,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-36 pb-32">
         {/* Right side decorative icon — same as AuthoritySection */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.07] pointer-events-none hidden lg:block">
-          <img src={ICON} alt="" className="w-[520px] h-[520px] object-contain" style={{ filter: 'invert(1)' }} />
+          <img src={ICON} alt="" className="w-[500px] h-[500px] object-contain" style={{ filter: 'invert(1)' }} />
         </div>
 
         <div className="max-w-3xl">
