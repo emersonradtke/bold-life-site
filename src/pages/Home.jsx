@@ -38,19 +38,29 @@ export default function Home() {
     };
   }, []);
 
+  const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
+
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-x-hidden">
-      <ScrollProgress />
-      <BottomNav />
-      <ScrollDownButton />
+      {/* Background decorative logo */}
+      <div className="fixed inset-0 opacity-5 pointer-events-none flex items-center justify-center">
+        <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+      </div>
+      <div className="relative z-10">
+        <ScrollProgress />
+        <BottomNav />
+        <ScrollDownButton />
+      </div>
 
-      <HeroSection />
-      <AuthoritySection />
-      <PhysicalPresence />
-      <FractalMath />
-      <LifestyleSection />
-      <FinalCTA />
-      <Footer />
+      <div className="relative z-10">
+        <HeroSection />
+        <AuthoritySection />
+        <PhysicalPresence />
+        <FractalMath />
+        <LifestyleSection />
+        <FinalCTA />
+        <Footer />
+      </div>
     </div>
   );
 }

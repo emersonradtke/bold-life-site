@@ -65,9 +65,15 @@ export default function Settings() {
     );
   }
 
+  const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
+
   return (
-    <div className="min-h-screen bg-background text-foreground p-6">
-      <div className="max-w-2xl mx-auto">
+    <div className="relative min-h-screen bg-background text-foreground p-6 overflow-hidden">
+      {/* Background decorative logo */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
+        <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+      </div>
+      <div className="relative z-10 max-w-2xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           <button
