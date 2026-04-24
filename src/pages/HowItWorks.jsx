@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, TrendingUp, Users, Zap, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -46,6 +46,10 @@ export default function HowItWorks() {
   const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
