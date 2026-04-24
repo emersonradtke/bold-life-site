@@ -65,7 +65,7 @@ export default function BottomNav() {
                 key={item.href}
                 onClick={() => scrollTo(item.href, item.label)}
                 className={`relative flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 ${
-                isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`
+                isActive ? 'text-primary-foreground' : 'text-muted-foreground hover:text-primary'}`
                 }>
                 
                 {isActive &&
