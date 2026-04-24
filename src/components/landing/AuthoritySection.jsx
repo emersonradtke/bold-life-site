@@ -64,7 +64,7 @@ export default function AuthoritySection() {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="text-muted-foreground leading-relaxed"
             >
-              Você consome desde antes de nascer e continuará consumindo até o seu último dia. O consumo não é uma opção, é uma obrigatoriedade. A Bold Life nasceu para quebrar o ciclo onde você apenas paga a conta. No nosso modelo, o consumo gera lucro. Movimentamos um mercado de 200 bilhões de dólares — o mesmo que sustenta potências como os EUA e Japão — trazendo essa ciência para a palma da sua mão através de uma oportunidade brasileira, nascida na solidez industrial do Vale do Aço.
+              Você consome desde antes de nascer e continuará consumindo até o seu último dia. O consumo não é uma opção, é uma obrigatoriedade. A Bold Life nasceu para quebrar o ciclo onde você apenas paga a conta. No nosso modelo, o consumo gera lucro. Esse mercado movimenta bilhões de dólares — o mesmo que sustenta potências como os EUA e Japão — trazendo essa ciência para a palma da sua mão através de uma oportunidade brasileira, nascida na solidez industrial do Vale do Aço.
             </motion.p>
           </div>
 
