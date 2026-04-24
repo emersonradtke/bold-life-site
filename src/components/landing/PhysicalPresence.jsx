@@ -64,7 +64,7 @@ export default function PhysicalPresence() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-muted-foreground leading-relaxed"
           >
-            Esqueça a dependência de fretes caros ou esperas infinitas. A Bold Life é real e física. Através de parcerias estratégicas, estamos presentes onde você já faz suas compras todos os dias. Seja no supermercado do seu bairro, em grandes redes de shoppings ou hotéis, nosso sistema permite que você retire produtos e gere benefícios na esquina da sua casa. É a conveniência do mundo físico com a inteligência do ganho digital. Consumo inteligente é comprar onde você já compra, mas agora, sendo remunerado por isso.
+            Esqueça a dependência de fretes caros ou esperas infinitas. A Bold Life é real e física. Através de parcerias estratégicas, estamos presentes onde você já faz suas compras todos os dias. Seja no supermercado do seu bairro, em grandes redes de shoppings ou hotéis, nosso sistema permite que você retire produtos e gere benefícios na esquina da sua casa. É a conveniência do mundo físico com a inteligência do ganho digital. Consumo inteligente é comprar produtos que você já compra, mas agora, sendo remunerado por isso.
           </motion.p>
         </div>
 
