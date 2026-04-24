@@ -40,7 +40,7 @@ export default function AuthoritySection() {
               transition={{ delay: 0.2 }}
               className="text-primary font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4"
             >
-              S1 — A Ciência do Consumo
+              A Ciência do Consumo
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
