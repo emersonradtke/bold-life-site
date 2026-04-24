@@ -20,14 +20,20 @@ export default function SupportModal({ visible = true }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    const dept = departments.find(d => d.label === form.department);
-    await base44.integrations.Core.SendEmail({
-      to: dept.email,
-      subject: `[${form.department}] Contato de ${form.name}`,
-      body: `Nome: ${form.name}\nEmail: ${form.email}\n\nMensagem:\n${form.message}`,
-    });
-    setSending(false);
-    setSent(true);
+    try {
+      const dept = departments.find(d => d.label === form.department);
+      await base44.integrations.Core.SendEmail({
+        to: dept.email,
+        subject: `[${form.department}] Contato de ${form.name}`,
+        body: `Nome: ${form.name}\nEmail: ${form.email}\n\nMensagem:\n${form.message}`,
+      });
+      setSent(true);
+    } catch (error) {
+      console.error('Erro ao enviar email:', error);
+      alert('Erro ao enviar mensagem. Tente novamente.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleClose = () => {
