@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { Award, GraduationCap } from 'lucide-react';
 
 const TRAINING_IMG = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80';
-const AWARD_IMG = 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1200&q=80';
+const AWARD_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/9c820a3eb_generated_image.png';
 
 const rewards = [
   { icon: GraduationCap, title: 'Capacitação de Elite', desc: 'Treinamentos intensivos com os maiores líderes do mercado.', img: TRAINING_IMG },
