@@ -76,9 +76,7 @@ export default function BottomNav() {
 
                 }
                 <item.icon className="w-4 h-4 relative z-10" />
-                <span className={`text-xs font-heading font-semibold relative z-10 hidden sm:inline ${
-                isActive ? '' : 'sr-only sm:not-sr-only'}`
-                }>
+                <span className="text-xs font-heading font-semibold relative z-10 hidden sm:inline">
                   {item.label}
                 </span>
               </button>);
