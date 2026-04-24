@@ -21,11 +21,11 @@ export default function SupportModal({ visible = true }) {
     e.preventDefault();
     setSending(true);
     try {
-      const dept = departments.find(d => d.label === form.department);
-      await base44.integrations.Core.SendEmail({
-        to: dept.email,
-        subject: `[${form.department}] Contato de ${form.name}`,
-        body: `Nome: ${form.name}\nEmail: ${form.email}\n\nMensagem:\n${form.message}`,
+      await base44.functions.invoke('sendSupportEmail', {
+        name: form.name,
+        email: form.email,
+        department: form.department,
+        message: form.message,
       });
       setSent(true);
     } catch (error) {
