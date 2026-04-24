@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 const HERO_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/923b7524e_generated_3b7c55ae.png';
 const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/aa85e3a3d_BOLDLIFE02-LOGO1.png';
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
+const BRAIN_IMG = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/7eef2ee9b_BOLDLIFE052-LOGO.png';
 
 export default function HeroSection() {
   return (
@@ -21,6 +22,18 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-36 pb-32">
+        {/* Brain image - right side */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none">
+          <motion.img
+            src={BRAIN_IMG}
+            alt=""
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.18, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.5 }}
+            className="w-[520px] h-[520px] object-contain"
+          />
+        </div>
+
         <div className="max-w-3xl">
           {/* Logo */}
           <motion.div
