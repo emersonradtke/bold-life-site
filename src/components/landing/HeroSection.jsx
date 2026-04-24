@@ -82,15 +82,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Large decorative icon */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.06 }}
-          transition={{ duration: 1.5, delay: 1.2 }}
-          className="absolute -right-16 top-1/2 -translate-y-1/2 hidden xl:block"
-        >
-          <img src={ICON} alt="" className="w-[480px] h-[480px] object-contain select-none" style={{ filter: 'invert(1)' }} />
-        </motion.div>
+
       </div>
 
 
