@@ -9,21 +9,7 @@ import Footer from '../components/landing/Footer';
 import ScrollProgress from '../components/landing/ScrollProgress';
 import BottomNav from '../components/landing/BottomNav';
 import ScrollDownButton from '../components/landing/ScrollDownButton';
-import SupportModal from '../components/landing/SupportModal';
-
 export default function Home() {
-  const [showSupport, setShowSupport] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const el = document.getElementById('convite');
-      if (el) {
-        setShowSupport(el.getBoundingClientRect().top <= window.innerHeight);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     // Disable right-click
@@ -57,7 +43,7 @@ export default function Home() {
       <ScrollProgress />
       <BottomNav />
       <ScrollDownButton />
-      <SupportModal visible={showSupport} />
+
       <HeroSection />
       <AuthoritySection />
       <PhysicalPresence />
