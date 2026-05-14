@@ -1,153 +1,104 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Plus, Pencil, Trash2, CheckCircle2, Clock, Loader2, Lock, Flag } from 'lucide-react';
+import { ArrowLeft, Plus, Pencil, Trash2, CheckCircle2, Clock, Loader2, Lock, Flag, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import AdminPasswordModal from '@/components/roadmap/AdminPasswordModal';
 import RoadmapItemForm from '@/components/roadmap/RoadmapItemForm';
+import BrainRoad from '@/components/roadmap/BrainRoad';
 
 const HEADER_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/1be673aa0_BOLDLIFE02-LOGO1.png';
 const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
 
 const statusConfig = {
-  planejado:    { label: 'Planejado',    Icon: Clock,        color: 'text-muted-foreground', nodeBg: 'bg-muted',       nodeBorder: 'border-border',       cardBorder: 'border-border',        glow: '' },
-  em_andamento: { label: 'Em Andamento', Icon: Loader2,      color: 'text-primary',          nodeBg: 'bg-primary',     nodeBorder: 'border-primary',      cardBorder: 'border-primary/60',    glow: 'shadow-[0_0_24px_rgba(43,159,232,0.4)]' },
-  concluido:    { label: 'Concluído',    Icon: CheckCircle2, color: 'text-green-400',        nodeBg: 'bg-green-500',   nodeBorder: 'border-green-400',    cardBorder: 'border-green-400/60',  glow: 'shadow-[0_0_24px_rgba(74,222,128,0.3)]' },
+  planejado:    { label: 'Planejado',    Icon: Clock,        color: 'text-muted-foreground', nodeBg: 'bg-muted',     nodeBorder: 'border-border',     cardBorder: 'border-border',       glow: '' },
+  em_andamento: { label: 'Em Andamento', Icon: Loader2,      color: 'text-primary',          nodeBg: 'bg-primary',   nodeBorder: 'border-primary',    cardBorder: 'border-primary/60',   glow: 'shadow-[0_0_24px_rgba(43,159,232,0.5)]' },
+  concluido:    { label: 'Concluído',    Icon: CheckCircle2, color: 'text-green-400',        nodeBg: 'bg-green-500', nodeBorder: 'border-green-400',  cardBorder: 'border-green-400/60', glow: 'shadow-[0_0_24px_rgba(74,222,128,0.35)]' },
 };
 
-/* Animated road line that draws itself as user scrolls */
-function RoadLine({ containerRef }) {
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start center', 'end end'] });
-  const rawHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const height = useSpring(rawHeight, { stiffness: 60, damping: 20 });
-
-  return (
-    <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 overflow-hidden rounded-full bg-border/30">
-      <motion.div style={{ height }} className="w-full bg-gradient-to-b from-primary via-primary/70 to-primary/20 origin-top" />
-    </div>
-  );
-}
-
-function StatusBadge({ cfg, status, alignRight }) {
-  const { Icon, label, color } = cfg;
-  return (
-    <div className={`inline-flex items-center gap-1.5 ${alignRight ? 'flex-row-reverse' : ''}`}>
-      <Icon className={`w-3 h-3 ${color} ${status === 'em_andamento' ? 'animate-spin' : ''}`} />
-      <span className={`text-xs font-heading font-bold ${color}`}>{label}</span>
-    </div>
-  );
-}
-
-function AdminActions({ isAdmin, onEdit, onDelete }) {
-  if (!isAdmin) return null;
-  return (
-    <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-      <button onClick={onEdit} className="p-1 rounded bg-muted/60 hover:bg-muted border border-border text-muted-foreground hover:text-foreground transition-colors">
-        <Pencil className="w-3 h-3" />
-      </button>
-      <button onClick={onDelete} className="p-1 rounded bg-muted/60 hover:bg-destructive/20 border border-border text-muted-foreground hover:text-red-400 transition-colors">
-        <Trash2 className="w-3 h-3" />
-      </button>
-    </div>
-  );
-}
-
-function RoadmapNode({ item, index, isAdmin, onEdit, onDelete }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
-  const isLeft = index % 2 === 0;
+/* A node dot placed on the brain path */
+function BrainNode({ item, index, isAdmin, onEdit, onDelete, onSelect, selected }) {
   const cfg = statusConfig[item.status] || statusConfig.planejado;
   const { Icon } = cfg;
 
-  const cardVariants = {
-    hidden: { opacity: 0, x: isLeft ? -60 : 60, rotateY: isLeft ? -8 : 8 },
-    visible: { opacity: 1, x: 0, rotateY: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
-  };
+  return (
+    <div className="relative">
+      {/* Pulse for em_andamento */}
+      {item.status === 'em_andamento' && (
+        <motion.div
+          animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute inset-0 rounded-full bg-primary/40"
+        />
+      )}
 
-  const nodeVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { duration: 0.4, delay: 0.2, type: 'spring', stiffness: 260, damping: 18 } },
-  };
+      <motion.button
+        onClick={() => onSelect(selected ? null : item)}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: index * 0.08, type: 'spring', stiffness: 260, damping: 18 }}
+        whileHover={{ scale: 1.2 }}
+        className={`relative w-9 h-9 rounded-full ${cfg.nodeBg} border-2 ${cfg.nodeBorder} flex items-center justify-center cursor-pointer ${selected ? 'ring-2 ring-white ring-offset-1 ring-offset-background' : ''}`}
+      >
+        <Icon className={`w-4 h-4 text-white ${item.status === 'em_andamento' ? 'animate-spin' : ''}`} />
+      </motion.button>
+    </div>
+  );
+}
 
-  const labelVariants = {
-    hidden: { opacity: 0, x: isLeft ? 30 : -30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.3 } },
-  };
+/* Floating info card that appears when a node is clicked */
+function InfoCard({ item, isAdmin, onEdit, onDelete, onClose }) {
+  const cfg = statusConfig[item.status] || statusConfig.planejado;
+  const { Icon } = cfg;
 
   return (
-    <div ref={ref} className="relative flex items-center justify-center w-full" style={{ minHeight: 120 }}>
-
-      {/* Card */}
+    <AnimatePresence>
       <motion.div
-        variants={cardVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className={`absolute ${isLeft ? 'right-[calc(50%+40px)]' : 'left-[calc(50%+40px)]'} w-[42%] max-w-xs`}
-        style={{ perspective: 600 }}
+        key={item.id}
+        initial={{ opacity: 0, y: 12, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 8, scale: 0.95 }}
+        transition={{ duration: 0.25 }}
+        className={`bg-card/95 backdrop-blur-md border ${cfg.cardBorder} ${cfg.glow} rounded-sm p-5 w-72 relative`}
       >
-        <motion.div
-          whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-          className={`relative bg-card/80 backdrop-blur-sm border ${cfg.cardBorder} ${cfg.glow} rounded-sm p-4 group ${isLeft ? 'text-right' : ''}`}
-        >
-          <StatusBadge cfg={cfg} status={item.status} alignRight={isLeft} />
-          <h3 className="font-heading font-bold text-sm mb-1 mt-2">{item.title}</h3>
-          {item.description && <p className="text-muted-foreground text-xs leading-relaxed">{item.description}</p>}
-          <AdminActions isAdmin={isAdmin} onEdit={() => onEdit(item)} onDelete={() => onDelete(item.id)} />
-        </motion.div>
-        {/* Connector */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.35 }}
-          style={{ originX: isLeft ? 1 : 0 }}
-          className={`absolute top-1/2 -translate-y-1/2 h-px w-8 bg-border ${isLeft ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'}`}
-        />
-      </motion.div>
+        <button onClick={onClose} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors">
+          <X className="w-4 h-4" />
+        </button>
 
-      {/* Center node */}
-      <motion.div
-        variants={nodeVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className="relative z-10 shrink-0"
-      >
-        {/* Pulse ring for em_andamento */}
-        {item.status === 'em_andamento' && (
-          <motion.div
-            animate={{ scale: [1, 1.7, 1], opacity: [0.6, 0, 0.6] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 rounded-full bg-primary/40"
-          />
-        )}
-        <div className={`w-10 h-10 rounded-full ${cfg.nodeBg} border-2 ${cfg.nodeBorder} flex items-center justify-center`}>
-          <Icon className={`w-4 h-4 text-white ${item.status === 'em_andamento' ? 'animate-spin' : ''}`} />
+        <div className="inline-flex items-center gap-1.5 mb-3">
+          <Icon className={`w-3.5 h-3.5 ${cfg.color} ${item.status === 'em_andamento' ? 'animate-spin' : ''}`} />
+          <span className={`text-xs font-heading font-bold ${cfg.color}`}>{cfg.label}</span>
+          <span className="text-xs text-primary/60 font-heading font-black tracking-widest uppercase ml-2">{item.quarter}</span>
         </div>
-      </motion.div>
 
-      {/* Quarter label */}
-      <motion.div
-        variants={labelVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className={`absolute ${isLeft ? 'left-[calc(50%+40px)]' : 'right-[calc(50%+40px)]'} ${isLeft ? 'text-left' : 'text-right'}`}
-      >
-        <span className="font-heading font-black text-xs tracking-[0.2em] uppercase text-primary/60">{item.quarter}</span>
+        <h3 className="font-heading font-bold text-base mb-2">{item.title}</h3>
+        {item.description && <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>}
+
+        {isAdmin && (
+          <div className="flex gap-2 mt-4 pt-3 border-t border-border">
+            <button onClick={() => onEdit(item)} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <Pencil className="w-3 h-3" /> Editar
+            </button>
+            <button onClick={() => onDelete(item.id)} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-red-400 transition-colors ml-2">
+              <Trash2 className="w-3 h-3" /> Remover
+            </button>
+          </div>
+        )}
       </motion.div>
-    </div>
+    </AnimatePresence>
   );
 }
 
 export default function Roadmap() {
   const navigate = useNavigate();
-  const roadRef = useRef(null);
-
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -175,23 +126,25 @@ export default function Roadmap() {
   const handleDelete = async (id) => {
     if (!confirm('Remover este item do roadmap?')) return;
     await base44.entities.RoadmapItem.delete(id);
+    setSelectedItem(null);
     loadItems();
   };
 
   const handleEdit = (item) => {
     setEditingItem(item);
     setShowForm(true);
+    setSelectedItem(null);
   };
 
   return (
     <div className="relative bg-background text-foreground min-h-screen overflow-hidden">
       {/* Animated background */}
       <motion.div
-        animate={{ opacity: [0.03, 0.06, 0.03] }}
+        animate={{ opacity: [0.04, 0.07, 0.04] }}
         transition={{ duration: 6, repeat: Infinity }}
         className="fixed inset-0 pointer-events-none flex items-center justify-center"
       >
-        <img src={BACKGROUND_LOGO} alt="" className="w-[800px] h-[800px] object-contain" />
+        <img src={BACKGROUND_LOGO} alt="" className="w-[700px] h-[700px] object-contain" />
       </motion.div>
 
       {/* Header */}
@@ -225,7 +178,7 @@ export default function Roadmap() {
           <img src={HEADER_LOGO} alt="Bold Life" className="h-10 mb-6" />
           <h1 className="font-heading font-black text-4xl md:text-5xl leading-tight mb-4">Roadmap Bold Life</h1>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
-            Acompanhe os marcos e novidades que estamos construindo para transformar ainda mais a sua experiência na plataforma.
+            Cada ponto no cérebro representa um marco da plataforma. Toque para explorar.
           </p>
         </motion.div>
       </div>
@@ -241,7 +194,7 @@ export default function Roadmap() {
         </div>
       )}
 
-      {/* Road */}
+      {/* Brain Road + Info Card */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-16 pb-32">
         {loading ? (
           <div className="flex items-center justify-center py-20">
@@ -255,49 +208,64 @@ export default function Roadmap() {
             {isAdmin && <p className="text-sm">Clique em "Novo Item" para adicionar o primeiro marco.</p>}
           </div>
         ) : (
-          <div ref={roadRef} className="relative">
-            {/* Animated road line */}
-            <RoadLine containerRef={roadRef} />
+          <div className="flex flex-col lg:flex-row items-start gap-8">
+            {/* Brain */}
+            <div className="flex-1 flex justify-center">
+              <BrainRoad
+                items={items}
+                renderNode={(item, index, pos) => (
+                  <BrainNode
+                    key={item.id}
+                    item={item}
+                    index={index}
+                    isAdmin={isAdmin}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    onSelect={setSelectedItem}
+                    selected={selectedItem?.id === item.id}
+                  />
+                )}
+              />
+            </div>
 
-            {/* Start flag */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.6, type: 'spring', stiffness: 200 }}
-              className="relative flex justify-center mb-10"
-            >
-              <motion.div
-                animate={{ boxShadow: ['0 0 0px rgba(43,159,232,0)', '0 0 20px rgba(43,159,232,0.6)', '0 0 0px rgba(43,159,232,0)'] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="z-10 w-12 h-12 rounded-full bg-primary flex items-center justify-center border-2 border-primary-foreground"
-              >
-                <Flag className="w-5 h-5 text-primary-foreground" />
-              </motion.div>
-            </motion.div>
-
-            {/* Nodes */}
-            <div className="flex flex-col gap-12">
-              {items.map((item, idx) => (
-                <RoadmapNode
-                  key={item.id}
-                  item={item}
-                  index={idx}
+            {/* Info panel */}
+            <div className="lg:w-80 w-full">
+              {selectedItem ? (
+                <InfoCard
+                  item={selectedItem}
                   isAdmin={isAdmin}
                   onEdit={handleEdit}
                   onDelete={handleDelete}
+                  onClose={() => setSelectedItem(null)}
                 />
-              ))}
-            </div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-muted-foreground text-sm font-heading flex flex-col items-center justify-center h-40 border border-border/40 rounded-sm bg-card/30 px-6 text-center"
+                >
+                  <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center mb-3">
+                    <Flag className="w-4 h-4 text-primary" />
+                  </div>
+                  Toque em um ponto do<br />cérebro para ver os detalhes
+                </motion.div>
+              )}
 
-            {/* End dot */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-              className="relative flex justify-center mt-10"
-            >
-              <div className="z-10 w-6 h-6 rounded-full border-2 border-border bg-background" />
-            </motion.div>
+              {/* Legend */}
+              <div className="mt-6 space-y-2">
+                {Object.entries(statusConfig).map(([key, cfg]) => {
+                  const { Icon } = cfg;
+                  return (
+                    <div key={key} className="flex items-center gap-2 text-xs">
+                      <div className={`w-4 h-4 rounded-full ${cfg.nodeBg} border ${cfg.nodeBorder} flex items-center justify-center`}>
+                        <Icon className="w-2.5 h-2.5 text-white" />
+                      </div>
+                      <span className={cfg.color}>{cfg.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )}
       </div>
