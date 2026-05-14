@@ -17,14 +17,27 @@ const statusConfig = {
 };
 
 /* Animated road line that draws itself as user scrolls */
-function RoadLine({ containerRef }) {
+function RoadLine({ containerRef, items }) {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start center', 'end end'] });
   const rawHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
   const height = useSpring(rawHeight, { stiffness: 60, damping: 20 });
 
+  // Calculate % of items concluded to show blue segment
+  const total = items.length;
+  const concluded = items.filter(i => i.status === 'concluido').length;
+  const bluePct = total > 0 ? (concluded / total) * 100 : 0;
+
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 overflow-hidden rounded-full bg-border/30">
-      <motion.div style={{ height }} className="w-full bg-gradient-to-b from-primary via-primary/70 to-primary/20 origin-top" />
+    <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 rounded-full bg-border/30 overflow-hidden">
+      {/* Blue concluded segment */}
+      {bluePct > 0 && (
+        <div
+          className="absolute top-0 left-0 w-full bg-primary transition-all duration-700"
+          style={{ height: `${bluePct}%` }}
+        />
+      )}
+      {/* Scroll-animated overlay for the rest */}
+      <motion.div style={{ height }} className="w-full bg-gradient-to-b from-primary/40 to-primary/10 origin-top" />
     </div>
   );
 }
@@ -257,7 +270,7 @@ export default function Roadmap() {
         ) : (
           <div ref={roadRef} className="relative">
             {/* Animated road line */}
-            <RoadLine containerRef={roadRef} />
+            <RoadLine containerRef={roadRef} items={items} />
 
             {/* Start flag */}
             <motion.div
