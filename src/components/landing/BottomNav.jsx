@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, TrendingUp, MapPin, Users, Award, Rocket } from 'lucide-react';
+import { Flame, TrendingUp, MapPin, Users, Award, Rocket, Map } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/c45c6b15b_BOLDLIFE01-LOGO1.png';
 
@@ -10,10 +11,12 @@ const navItems = [
 { icon: MapPin, label: 'Presença', href: '#presenca' },
 { icon: Users, label: 'Método', href: '#metodo' },
 { icon: Award, label: 'Mérito', href: '#merito' },
+{ icon: Map, label: 'Roadmap', href: '/roadmap' },
 { icon: Rocket, label: 'Acesse', href: '#convite' }];
 
 
 export default function BottomNav() {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(true);
   const [active, setActive] = useState('#hero');
 
@@ -37,6 +40,10 @@ export default function BottomNav() {
   const scrollTo = (href, label) => {
     if (label === 'Acesse') {
       window.open('https://boldlife7.com.br/bold/login.php', '_blank');
+      return;
+    }
+    if (label === 'Roadmap') {
+      navigate('/roadmap');
       return;
     }
     const el = document.getElementById(href.slice(1));
