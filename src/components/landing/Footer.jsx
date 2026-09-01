@@ -25,7 +25,6 @@ export default function Footer() {
     { label: 'Sobre', to: '/sobre' },
     { label: 'Como funciona', to: '/como-funciona' },
     { label: 'Contato', to: '/contato' },
-    { label: 'Roadmap', to: '/roadmap' },
   ];
 
   return (
