@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
 import { Instagram, Facebook, Youtube, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
+import { SITE_CONFIG } from '@/config/site';
 
 const LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/aa85e3a3d_BOLDLIFE02-LOGO1.png';
 const ICON = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/6b81ab293_BOLDLIFE-ICON.png';
@@ -10,14 +9,8 @@ const NETWORK_IMG = 'https://media.base44.com/images/public/69ea590d4b0217684680
 const socialIcons = { instagram: Instagram, facebook: Facebook, youtube: Youtube, linkedin: Linkedin, twitter: Twitter };
 
 export default function Footer() {
-  const [config, setConfig] = useState(null);
-
-  useEffect(() => {
-    base44.entities.SeoConfig.list().then((rows) => setConfig(rows && rows[0])).catch(() => {});
-  }, []);
-
   const socials = ['instagram', 'facebook', 'youtube', 'linkedin', 'tiktok', 'twitter']
-    .map((k) => ({ key: k, url: config?.[k] }))
+    .map((k) => ({ key: k, url: SITE_CONFIG[k] }))
     .filter((s) => s.url);
 
   const navLinks = [
@@ -51,7 +44,7 @@ export default function Footer() {
             ))}
           </nav>
 
-          {socials.length > 0 && (
+          {socials.length > 0 ? (
             <div className="flex justify-center gap-5 mt-6">
               {socials.map((s) => {
                 const Icon = socialIcons[s.key] || Instagram;
@@ -62,11 +55,9 @@ export default function Footer() {
                 );
               })}
             </div>
-          )}
-
-          {(!config || socials.length === 0) && (
+          ) : (
             <div className="flex justify-center mt-6">
-              <a href={config?.instagram || 'https://www.instagram.com/boldlifebrasil/'} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300">
+              <a href={SITE_CONFIG.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300">
                 <Instagram className="w-5 h-5" />
                 <span className="text-sm font-heading font-semibold">@boldlifebrasil</span>
               </a>

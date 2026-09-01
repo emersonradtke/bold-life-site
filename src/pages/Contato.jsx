@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Phone, Mail, MapPin, MessageCircle, Send, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +8,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Footer from '@/components/landing/Footer';
 import { useSeo, SITE_URL } from '@/hooks/useSeo';
+import { SITE_CONFIG } from '@/config/site';
 
 const HEADER_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/1be673aa0_BOLDLIFE02-LOGO1.png';
 
 export default function Contato() {
   const navigate = useNavigate();
-  const [config, setConfig] = useState(null);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -31,10 +31,6 @@ export default function Contato() {
       url: `${SITE_URL}/contato`,
     },
   });
-
-  useEffect(() => {
-    base44.entities.SeoConfig.list().then((rows) => setConfig(rows && rows[0])).catch(() => {});
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,10 +52,10 @@ export default function Contato() {
   };
 
   const channels = [
-    { icon: Phone, label: 'Telefone', value: config?.phone, href: config?.phone ? `tel:${config.phone}` : null },
-    { icon: MessageCircle, label: 'WhatsApp', value: config?.whatsapp, href: config?.whatsapp ? `https://wa.me/${config.whatsapp.replace(/\D/g, '')}` : null },
-    { icon: Mail, label: 'E-mail', value: config?.email, href: config?.email ? `mailto:${config.email}` : null },
-    { icon: MapPin, label: 'Endereço', value: config?.address },
+    { icon: Phone, label: 'Telefone', value: SITE_CONFIG.phone, href: SITE_CONFIG.phone ? `tel:${SITE_CONFIG.phone}` : null },
+    { icon: MessageCircle, label: 'WhatsApp', value: SITE_CONFIG.whatsapp, href: SITE_CONFIG.whatsapp ? `https://wa.me/${SITE_CONFIG.whatsapp.replace(/\D/g, '')}` : null },
+    { icon: Mail, label: 'E-mail', value: SITE_CONFIG.email, href: SITE_CONFIG.email ? `mailto:${SITE_CONFIG.email}` : null },
+    { icon: MapPin, label: 'Endereço', value: SITE_CONFIG.address },
   ];
 
   return (
@@ -106,13 +102,13 @@ export default function Contato() {
               ))}
             </div>
 
-            {config && (config.instagram || config.facebook || config.youtube || config.linkedin || config.tiktok || config.twitter) && (
+            {(SITE_CONFIG.instagram || SITE_CONFIG.facebook || SITE_CONFIG.youtube || SITE_CONFIG.linkedin || SITE_CONFIG.tiktok || SITE_CONFIG.twitter) && (
               <div className="mt-6">
                 <h3 className="font-heading font-bold text-sm mb-3 text-muted-foreground">Redes sociais oficiais</h3>
                 <div className="flex flex-wrap gap-3">
                   {['instagram', 'facebook', 'youtube', 'linkedin', 'tiktok', 'twitter'].map((k) =>
-                    config[k] ? (
-                      <a key={k} href={config[k]} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 text-xs font-heading font-semibold rounded-sm bg-card border border-border hover:border-primary hover:text-primary transition-colors capitalize">
+                    SITE_CONFIG[k] ? (
+                      <a key={k} href={SITE_CONFIG[k]} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 text-xs font-heading font-semibold rounded-sm bg-card border border-border hover:border-primary hover:text-primary transition-colors capitalize">
                         {k === 'twitter' ? 'X / Twitter' : k}
                       </a>
                     ) : null
