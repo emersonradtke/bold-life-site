@@ -50,7 +50,7 @@ export default function HeroSection() {
             Ecossistema de Transformação
           </motion.p>
 
-          <motion.h1
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -58,7 +58,7 @@ export default function HeroSection() {
           >
             Não são as suas condições, e sim as suas{' '}
             <span className="text-primary">decisões</span> que determinam o seu destino.
-          </motion.h1>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

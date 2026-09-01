@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /settings
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: https://bold-life-hub.base44.app/sitemap.xml

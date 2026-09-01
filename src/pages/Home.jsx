@@ -9,7 +9,15 @@ import Footer from '../components/landing/Footer';
 import ScrollProgress from '../components/landing/ScrollProgress';
 import BottomNav from '../components/landing/BottomNav';
 import ScrollDownButton from '../components/landing/ScrollDownButton';
+import InstitutionalSection from '../components/landing/InstitutionalSection';
+import { useSeo } from '@/hooks/useSeo';
 export default function Home() {
+  useSeo({
+    title: null,
+    description: 'Conheça a Boldlife, plataforma brasileira de consumo inteligente que conecta consumidores, produtos, benefícios e oportunidades em um único ecossistema.',
+    path: '/',
+    type: 'website',
+  });
 
   useEffect(() => {
     // Disable right-click
@@ -45,6 +53,7 @@ export default function Home() {
       <ScrollDownButton />
 
       <HeroSection />
+      <InstitutionalSection />
       <AuthoritySection />
       <PhysicalPresence />
       <FractalMath />

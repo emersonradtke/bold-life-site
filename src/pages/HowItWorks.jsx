@@ -3,6 +3,27 @@ import { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, TrendingUp, Users, Zap, Target, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useSeo, SITE_URL } from '@/hooks/useSeo';
+
+const faqs = [
+  { q: 'O que é a Boldlife?', a: 'A Boldlife é uma plataforma brasileira de consumo inteligente que conecta consumidores, produtos, benefícios e oportunidades em um único ecossistema.' },
+  { q: 'Como funciona a Boldlife?', a: 'A Boldlife permite consumir produtos e serviços com valores diferenciados, comercializá-los dentro da plataforma, construir uma rede de empreendedores e receber comissões sobre o volume de consumo e vendas da sua equipe, até a 5ª geração.' },
+  { q: 'O que é consumo inteligente?', a: 'Consumo inteligente é a relação entre consumo e oportunidade: consumir produtos e serviços com valores diferenciados e, por meio de um modelo duplicável, transformar esse consumo em renda recorrente.' },
+  { q: 'Quais são os benefícios da Boldlife?', a: 'Acesso a produtos e serviços com valores diferenciados, benefícios exclusivos para associados e a possibilidade de gerar renda por um sistema estruturado de empreendedorismo em rede.' },
+  { q: 'Como participar da Boldlife?', a: 'A participação começa pelo cadastro na plataforma. Após se associar, você consome, comercializa e constrói sua rede seguindo o sistema de educação, capacitação e duplicação.' },
+  { q: 'Como comprar produtos Boldlife?', a: 'Os produtos e serviços ficam disponíveis na plataforma para os associados, com valores diferenciados. O acesso ocorre após o cadastro no ecossistema Boldlife.' },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  url: `${SITE_URL}/como-funciona`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const BACKGROUND_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/75a8a45d3_BOLDLIFE052-LOGO.png';
 const HEADER_LOGO = 'https://media.base44.com/images/public/69ea590d4b02176846809f70/1be673aa0_BOLDLIFE02-LOGO1.png';
@@ -47,6 +68,14 @@ export default function HowItWorks() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [showScrollButton, setShowScrollButton] = useState(true);
+
+  useSeo({
+    title: 'Como funciona a Boldlife | Consumo Inteligente',
+    description: 'Entenda como funciona a Boldlife, plataforma brasileira de consumo inteligente. Saiba o que é consumo inteligente, benefícios e como participar.',
+    path: '/como-funciona',
+    type: 'website',
+    jsonLd: faqJsonLd,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -170,6 +199,30 @@ export default function HowItWorks() {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* FAQ */}
+      <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-16 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-primary font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4 text-center">Perguntas Frequentes</p>
+          <h2 className="font-heading font-black text-3xl md:text-4xl text-center mb-12">Tudo sobre a Boldlife</h2>
+          <div className="space-y-4">
+            {faqs.map((f, i) => (
+              <details key={i} className="group bg-card/60 border border-border rounded-sm p-5">
+                <summary className="flex items-center justify-between cursor-pointer list-none font-heading font-semibold text-foreground">
+                  <span>{f.q}</span>
+                  <ChevronDown className="w-4 h-4 text-primary transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-muted-foreground text-sm leading-relaxed mt-3">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* Final CTA */}
