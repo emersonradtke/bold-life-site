@@ -33,4 +33,7 @@ export const SITE_CONFIG = {
   address: '',
   cnpj: '',
   razao_social: '',
+
+  // Webmail (Hostgator)
+  webmail_url: 'https://sh-pro00176.hostgator.com.br:2096/',
 };

@@ -102,6 +102,18 @@ export default function Contato() {
               ))}
             </div>
 
+            <div className="mt-6">
+              <a
+                href={SITE_CONFIG.webmail_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-3 text-sm font-heading font-semibold rounded-sm bg-primary/10 border border-primary/30 hover:bg-primary/20 hover:border-primary transition-colors"
+              >
+                <Mail className="w-4 h-4 text-primary" />
+                Acessar Webmail
+              </a>
+            </div>
+
             {(SITE_CONFIG.instagram || SITE_CONFIG.facebook || SITE_CONFIG.youtube || SITE_CONFIG.linkedin || SITE_CONFIG.tiktok || SITE_CONFIG.twitter) && (
               <div className="mt-6">
                 <h3 className="font-heading font-bold text-sm mb-3 text-muted-foreground">Redes sociais oficiais</h3>
