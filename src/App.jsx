@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import HowItWorks from './pages/HowItWorks';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
+import Pesquisa from './pages/Pesquisa';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -41,6 +42,7 @@ const AuthenticatedApp = () => {
       <Route path="/como-funciona" element={<HowItWorks />} />
       <Route path="/sobre" element={<Sobre />} />
       <Route path="/contato" element={<Contato />} />
+      <Route path="/pesquisa" element={<Pesquisa />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
